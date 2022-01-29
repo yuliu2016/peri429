@@ -40,7 +40,7 @@ typedef struct Moore_tag_Struct {
 } Moore_Struct;
 
 
-Moore_Struct Moore = {
+const Moore_Struct Moore = {
   {
     0x4d42u,
     sizeof(Moore_BITMAPINFOHEADER) + sizeof(Moore_BITMAPFILEHEADER) + (76800 * 2),
@@ -390,6 +390,7 @@ Moore_Struct Moore = {
 // struct packing, pragma for GCC !!!
 #pragma pack (pop)
 
+const uint8_t *MoorePtr = (uint8_t *) &Moore;
 
 
 #endif /* Moore_H_ */
