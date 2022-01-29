@@ -127,18 +127,16 @@ int main(void)
   if (HAL_TIM_Base_Start_IT(&htim10) != HAL_OK) {
     Error_Handler();
   }
-
-	BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   
   BSP_LCD_Init();
-	//BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address);
-	BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER);   //LCD_FRAME_BUFFER, defined as 0xD0000000 in _discovery_lcd.h
-														// the LayerIndex may be 0 and 1. if is 2, then the LCD is dark.
-	//BSP_LCD_SelectLayer(uint32_t LayerIndex);
-	BSP_LCD_SelectLayer(0);
-	//BSP_LCD_SetLayerVisible(0, ENABLE); //do not need this line.
-	BSP_LCD_Clear(LCD_COLOR_RED);  //need this line, otherwise, the screen is ddark
+  BSP_LCD_DisplayOff();
+  BSP_LCD_LayerDefaultInit(LCD_BACKGROUND_LAYER, LCD_FRAME_BUFFER);
+  BSP_LCD_LayerDefaultInit(LCD_FOREGROUND_LAYER, LCD_FRAME_BUFFER);
+  BSP_LCD_SelectLayer(LCD_FOREGROUND_LAYER);
+  BSP_LCD_Clear(LCD_COLOR_GREEN);
 	BSP_LCD_DisplayOn();
+	BSP_LCD_DrawBitmap(0, 0, MoorePtr);
+
 
   /* USER CODE END 2 */
 
@@ -149,6 +147,16 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+//    BSP_LCD_Clear(LCD_COLOR_RED);
+//    BSP_LCD_SetTextColor(LCD_COLOR_DARKGRAY);
+//    BSP_LCD_DisplayStringAtLine(1, (uint8_t *) "test 1");
+//    BSP_LCD_SetTextColor(LCD_COLOR_RED);
+//    BSP_LCD_DisplayStringAtLine(2, (uint8_t *) "test 2");
+//    BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+//    BSP_LCD_DisplayStringAtLine(3, (uint8_t *) "test 3");
+//    BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
+//    BSP_LCD_DisplayStringAtLine(4, (uint8_t *) "test 4");
+//    HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
